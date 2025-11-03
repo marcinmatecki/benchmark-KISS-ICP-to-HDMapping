@@ -1,12 +1,22 @@
-docker run --rm -it -v $(pwd)/data:/data --name kissicp2hdmapping kissicp2hdmapping:latest bash -c 'source /test_ws/src/install/setup.sh && ros2 run kiss-icp-to-hdmapping listener /data/ConSLAM/sequence1/converted' 
-docker run --rm -it -v $(pwd)/data:/data --name kissicp2hdmapping kissicp2hdmapping:latest bash -c 'source /test_ws/src/install/setup.sh && ros2 run kiss-icp-to-hdmapping listener /data/ConSLAM/sequence2/converted' 
-docker run --rm -it -v $(pwd)/data:/data --name kissicp2hdmapping kissicp2hdmapping:latest bash -c 'source /test_ws/src/install/setup.sh && ros2 run kiss-icp-to-hdmapping listener /data/ConSLAM/sequence3/converted' 
-docker run --rm -it -v $(pwd)/data:/data --name kissicp2hdmapping kissicp2hdmapping:latest bash -c 'source /test_ws/src/install/setup.sh && ros2 run kiss-icp-to-hdmapping listener /data/ConSLAM/sequence4/converted' 
-docker run --rm -it -v $(pwd)/data:/data --name kissicp2hdmapping kissicp2hdmapping:latest bash -c 'source /test_ws/src/install/setup.sh && ros2 run kiss-icp-to-hdmapping listener /data/ConSLAM/sequence5/converted' 
+#!/bin/bash
 
-
-```shell
-cd /test_ws/
-source ./install/setup.sh # adjust to used shell
-ros2 run kiss-icp-to-hdmapping listener <recorded_bag> <output_dir>
-```
+for SEQUENCE in {1..5}; do
+    RESULTS_PATH=./data/ConSLAM/sequence${SEQUENCE}/results-kiss-icp/
+    echo "--- Processing sequence ${SEQUENCE} ---"
+    LATEST_ROSBAG2_FOLDER=$(ls -dt ${RESULTS_PATH}/rosbag2_* 2>/dev/null | head -n 1)
+    echo "Latest rosbag2 folder: ${LATEST_ROSBAG2_FOLDER}"
+    
+    # Check if folder exists
+    if [ -z "${LATEST_ROSBAG2_FOLDER}" ]; then
+        echo "No rosbag2 folders found in ${RESULTS_PATH}"
+        continue
+    fi
+    
+    # Convert host path to container path
+    CONTAINER_ROSBAG2_FOLDER=${LATEST_ROSBAG2_FOLDER/.\/data/\/data}
+    
+    # Run the docker command with the parameterized path
+    echo "docker run --rm -it -v $(pwd)/data:/data kissicp2hdmapping:latest bash -c \"source /test_ws/src/install/setup.sh && ros2 run kiss-icp-to-hdmapping listener ${CONTAINER_ROSBAG2_FOLDER}/*.mcap ${CONTAINER_ROSBAG2_FOLDER}/hdmapping\""
+    docker run --rm -it -v $(pwd)/data:/data kissicp2hdmapping:latest bash -c "source /test_ws/src/install/setup.sh && rm -rf \"${LATEST_ROSBAG2_FOLDER}/hdmapping\" && mkdir \"${LATEST_ROSBAG2_FOLDER}/hdmapping\" && ros2 run kiss-icp-to-hdmapping listener ${CONTAINER_ROSBAG2_FOLDER}/*.mcap ${CONTAINER_ROSBAG2_FOLDER}/hdmapping"
+    echo "--- Processed sequence ${SEQUENCE} ---"
+done

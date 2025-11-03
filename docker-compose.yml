@@ -16,7 +16,7 @@ services:
     container_name: kissicp2hdmapping-recorder
     volumes:
       - ./data/ConSLAM/sequence${SEQUENCE_NUM:-1}:/data:rw
-    command: bash -c "source /test_ws/src/install/setup.sh && mkdir -p /data/results-kiss-icp/ && cd /data/results-kiss-icp/ && echo 'Waiting for KISS-ICP to start...' && timeout 60 bash -c 'until ros2 node list | grep -q kiss; do sleep 1; done' && echo 'KISS-ICP started, beginning recording...' && ros2 bag record --topics /kiss/frame /kiss/odometry & RECORD_PID=\$! && echo 'Monitoring rosbag2_player...' && while ros2 node list | grep -q rosbag2_player; do sleep 2; done && echo 'Bag file finished, stopping recorder...' && kill \$RECORD_PID 2>/dev/null && echo 'Recording stopped, exiting container...'"
+    command: bash -c "source /test_ws/src/install/setup.sh && mkdir -p /data/results-kiss-icp/ && cd /data/results-kiss-icp/ && echo 'Waiting for KISS-ICP to start...' && timeout 60 bash -c 'until ros2 node list | grep -q kiss; do sleep 1; done' && echo 'KISS-ICP started, beginning recording...' && ros2 bag record --topics /kiss/local_map /kiss/odometry & RECORD_PID=\$! && echo 'Monitoring rosbag2_player...' && while ros2 node list | grep -q rosbag2_player; do sleep 2; done && echo 'Bag file finished, stopping recorder...' && kill \$RECORD_PID 2>/dev/null && echo 'Recording stopped, exiting container...'"
     networks:
       - kiss-network
     environment:

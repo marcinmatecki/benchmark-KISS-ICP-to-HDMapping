@@ -89,3 +89,28 @@ cd /test_ws/
 source ./install/setup.sh # adjust to used shell
 ros2 run kiss-icp-to-hdmapping listener <recorded_bag> <output_dir>
 ```
+
+# With Docker
+
+```
+# prepare container
+./build-docker.sh
+# convert ROS to ROS2
+./run_docker_convert_to_ros2.sh
+# Run KISS ICP for the dataset
+./run_all_sequences.sh
+# Convert the result
+./run_docker_convert_result_to_hdmapping.sh
+```
+
+
+**ALTERNATIVE WAY**
+
+If you want to run using two terminals:
+
+```
+run_docker_kiss_icp.sh
+run_docker_record.sh
+```
+
+

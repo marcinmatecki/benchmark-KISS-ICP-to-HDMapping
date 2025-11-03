@@ -85,9 +85,9 @@ int main(int argc, char **argv)
     while (bag.has_next())
     {
         rosbag2_storage::SerializedBagMessageSharedPtr msg = bag.read_next();
-
-        if (msg->topic_name == "/kiss/local_map") {
-            RCLCPP_INFO(rclcpp::get_logger("KissFrame"), "Received message on topic: /kiss/local_map");
+        std::string kiss_frame_topic = "/kiss/local_map";
+        if (msg->topic_name == kiss_frame_topic) {
+            RCLCPP_INFO(rclcpp::get_logger("KissFrame"), "Received message on topic: %s", kiss_frame_topic.c_str());
         
             rclcpp::SerializedMessage serialized_msg(*msg->serialized_data);
             auto cloud_msg = std::make_shared<sensor_msgs::msg::PointCloud2>();
@@ -100,8 +100,8 @@ int main(int argc, char **argv)
             }
     
             pcl::PointCloud<pcl::PointXYZ> cloud;
-            size_t num_points = cloud_msg->width * cloud_msg->height;  // Suma punktów
-            uint8_t* data_ptr = cloud_msg->data.data();
+            size_t num_points = cloud_msg->width * cloud_msg->height;
+            // uint8_t* data_ptr = cloud_msg->data.data();
     
             RCLCPP_INFO(rclcpp::get_logger("KissFrame"), "Processing %zu points", num_points);
             
@@ -135,9 +135,7 @@ int main(int argc, char **argv)
             
                 points_global.push_back(point_global);
             }
-            
-
-            RCLCPP_INFO(rclcpp::get_logger("KissFrame"), "Processed %zu points!", cloud.points.size());
+	    RCLCPP_INFO(rclcpp::get_logger("KissFrame"), "Processed %zu points!", cloud.points.size());
         }
         
         if (msg->topic_name == "/kiss/odometry") {
