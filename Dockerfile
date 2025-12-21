@@ -9,4 +9,4 @@ RUN apt-get install -y nlohmann-json3-dev libpcl-dev python3-pip
 RUN pip3 install rosbags --break-system-packages
 RUN mkdir -p /test_ws/src
 COPY src/ /test_ws/src
-RUN cd /test_ws && source /opt/ros/${ROS_DISTRO}/setup.bash && rosdep update && rosdep install --from-paths src --ignore-src -r -y || true && source /opt/ros/${ROS_DISTRO}/setup.bash &&colcon build
+RUN cd /test_ws && source /opt/ros/${ROS_DISTRO}/setup.bash && rosdep update && rosdep install --from-paths src --ignore-src -r -y || true && source /opt/ros/${ROS_DISTRO}/setup.bash && colcon build
