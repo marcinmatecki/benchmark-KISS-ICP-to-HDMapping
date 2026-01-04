@@ -31,7 +31,7 @@ Prepare recorded bag with estimated odometry:
 
 In first terminal record bag:
 ```shell
-ros2 bag record /kiss/local_map /kiss/odometry
+ros2 bag record /kiss/frame /kiss/odometry /tf /tf_static
 ```
 
 and start odometry:
