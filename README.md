@@ -1,5 +1,8 @@
-# kiss-icp-converter
+# [KISS-ICP](https://github.com/PRBonn/kiss-icp) converter to [HDMapping](https://github.com/MapsHD/HDMapping)
 
+## Hint
+
+Please change branch to [Bunker-DVI-Dataset-reg-1](https://github.com/MapsHD/benchmark-KISS-ICP-to-HDMapping/tree/Bunker-DVI-Dataset-reg-1) for quick experiment.  
 
 ## Intended use 
 

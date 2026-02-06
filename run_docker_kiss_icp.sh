@@ -1,2 +1,0 @@
-docker exec -it kissicp2hdmapping bash -c 'source /test_ws/src/install/setup.sh && ros2 launch kiss_icp odometry.launch.py bagfile:=/data/ConSLAM/sequence1/converted/ topic:=pp_points/synced2rgb visualize:="False"'
-# docker run --rm -it -v $(pwd)/data:/data -v $(pwd)/output:/host/output --name kissicp2hdmapping kissicp2hdmapping:latest bash -c 'source /test_ws/src/install/setup.sh && ros2 launch kiss_icp odometry.launch.py bagfile:=/data/ConSLAM/sequence1/converted/ topic:=pp_points/synced2rgb visualize:="False"'
