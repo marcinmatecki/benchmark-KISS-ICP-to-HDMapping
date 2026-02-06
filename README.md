@@ -14,6 +14,8 @@ Replace {path_to_folder_with_ros1_bag} with the path on your machine where the R
 docker run -it -v {path_to_folder_with_ros1_bag}:/data --user 1000:1000 kiss-icp_humble /bin/bash
 ```
 
+Convert the ROS 1 bag file to ROS 2 format using rosbags-convert
+
 ```shell
 rosbags-convert --src reg-1.bag-pc.bag --dst reg-1-ros2 
 ```
