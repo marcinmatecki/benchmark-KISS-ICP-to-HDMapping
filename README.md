@@ -14,7 +14,12 @@ cd /data
 rosbags-convert --src reg-1.bag-pc.bag --dst reg-1-ros2 
 ```
 
+close terminal
+
 ## Step 2 (prepare docker)
+
+open new terminal
+
 ```shell
 mkdir -p ~/hdmapping-benchmark
 cd ~/hdmapping-benchmark
