@@ -6,17 +6,11 @@ Download the dataset `reg-1.bag` by clicking [link](https://cloud.cylab.be/publi
 File 'reg-1.bag-pc.bag' is an input for further calculations.
 It should be located in '~/hdmapping-benchmark/data'.
 
-Run the Docker container(after step 2) with a mounted folder
-
-Replace {path_to_folder_with_ros1_bag} with the path on your machine where the ROS 1 bag files are stored:
+We now convert data from ROS1 to ROS2
 
 ```shell
-docker run -it -v {path_to_folder_with_ros1_bag}:/data --user 1000:1000 kiss-icp_humble /bin/bash
-```
-
-Convert the ROS 1 bag file to ROS 2 format using rosbags-convert
-
-```shell
+docker run -it -v ~/hdmapping-benchmark/data:/data --user 1000:1000 kiss-icp_humble /bin/bash
+cd /data
 rosbags-convert --src reg-1.bag-pc.bag --dst reg-1-ros2 
 ```
 
