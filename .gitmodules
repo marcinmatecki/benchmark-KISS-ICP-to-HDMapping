@@ -1,9 +1,6 @@
 [submodule "src/kiss-icp"]
 	path = src/kiss-icp
-	url = git@github.com:MapsHD/kiss-icp.git
-[submodule "src/cpp_pubsub/src/3rdparty/LASzip"]
-	path = src/cpp_pubsub/src/3rdparty/LASzip
-	url = https://github.com/LASzip/LASzip.git
+	url = https://github.com/PRBonn/kiss-icp.git
 [submodule "src/kiss-icp-to-hdmapping/src/3rdparty/LASzip"]
 	path = src/kiss-icp-to-hdmapping/src/3rdparty/LASzip
 	url = https://github.com/LASzip/LASzip.git

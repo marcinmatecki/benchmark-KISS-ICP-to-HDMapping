@@ -1,1 +1,0 @@
-docker run --rm -it -v $(pwd)/data:/data -v $(pwd)/output:/host/output --name kissicp2hdmapping kissicp2hdmapping:latest bash -c 'cd /host/output ; ros2 bag record --topics /kiss/local_map /kiss/odometry'
